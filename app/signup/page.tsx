@@ -3,7 +3,12 @@ import RegisterForm from "@/components/user/registerForm";
 import styled from "styled-components";
 
 const Container = styled.div`
-    width: 30%;
+    display: flex;
+    flex: 1 1 auto;
+`;
+
+const FormContainer = styled.div`
+    width: 35rem;
     margin: auto;
     padding: 1rem;
     background: var(--foreground);
@@ -15,13 +20,15 @@ const Container = styled.div`
     h1{
         margin: 0;
     }
-`
+`;
 
 export default function SignUp() {
     return (
         <Container>
-            <h1>Register</h1>
-            <RegisterForm />
+            <FormContainer>
+                <h1>Register</h1>
+                <RegisterForm />
+            </FormContainer>
         </Container>
     )
 }

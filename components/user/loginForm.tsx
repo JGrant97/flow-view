@@ -8,7 +8,7 @@ import { useActionState } from "react";
 
 const Form = styled.form`
     display: grid;
-    gap: 10px;
+    gap: 1.25rem;
 
     label{
         font-weight: bold;;
