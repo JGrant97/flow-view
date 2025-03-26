@@ -1,6 +1,6 @@
 "use client";
 
-import User from "@/types/user";
+import User from "@/components/user/user";
 import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext<User | undefined>(undefined);

@@ -1,11 +1,13 @@
 import CustomInputType from "@/types/customInputType";
 import styled from "styled-components";
+
 const Container = styled.label`
     position: relative;
     display: grid;
+    gap: 1rem;
 
     img{
-        width: 100%;
+        max-width: 100%;
         aspect-ratio: 16/9;
     }
 `;
@@ -19,9 +21,9 @@ const InputContainer = styled.div`
     cursor: pointer;
 `;
 
-export default function ImageInput(props: CustomInputType){
-    return(<
-        Container>
+export default function ImageInput(props: CustomInputType) {
+    return (
+        <Container>
             {props.label}
             <img src={props.imagesource} alt="sdasd" />
             <InputContainer>

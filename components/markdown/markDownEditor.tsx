@@ -59,6 +59,8 @@ const simpleSandpackConfig: SandpackConfig = {
 
 const StyledEditor = styled(MDXEditor)`
   background-color: #fff;
+  max-width: 100%;
+  min-width: 0;
 `
 
 export default function MarkDownEditor({

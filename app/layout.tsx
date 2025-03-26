@@ -25,13 +25,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await verifySession();
+  var user = session ? Utility.decryptJWT(session.token) : undefined;
 
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <UserContextProvider defaultUser={session ? Utility.decryptJWT(session.token) : undefined}>
+        <UserContextProvider defaultUser={user}>
           <StyledComponentsRegistry>
-            <TopNavBar />
+            <TopNavBar defaultUser={user}/>
             {children}
           </StyledComponentsRegistry>
         </UserContextProvider>

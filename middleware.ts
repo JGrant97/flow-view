@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Bearer from './types/bearer';
 import Utility from './lib/utility';
-import AuthAPI from './api/authAPI';
+import { Logout, Refresh } from './api/authAPI';
 
 const blockedLoggedIn = ['/login', "/signup"];
 const blockedConfirmedEmail = ['/confirmemail',];
@@ -21,7 +21,7 @@ export default async function middleware(req: NextRequest) {
   const user = Utility.decryptJWT(session?.token);
 
   if (Utility.jwtExpired(user.exp)) {
-    const result = await AuthAPI.Refresh(session);
+    const result = await Refresh();
     
     if (result instanceof Error) {
       response.cookies.delete('session');
@@ -32,6 +32,12 @@ export default async function middleware(req: NextRequest) {
     const cookieObj = Utility.getSessionResponseCookie();
 
     response.cookies.set('session', JSON.stringify(result), { ...cookieObj, expires })
+  }
+
+  if(path === "/signout"){
+    await Logout();
+    response.cookies.delete('session');
+    return NextResponse.redirect(new URL('/', req.nextUrl), {headers: response.headers});
   }
 
   if (isLoggedInBlock || isValidatedOnConfirmEmail) 

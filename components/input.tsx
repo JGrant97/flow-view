@@ -4,7 +4,7 @@ import CustomInputType from "@/types/customInputType";
 import styled from "styled-components"
 
 const InputEl = styled.input`
-    width: 100%;
+    max-width: 100%;
     height: 35px;
     border: 1px solid var(--background);
     border-radius: 5px;

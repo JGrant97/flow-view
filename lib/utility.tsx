@@ -1,4 +1,4 @@
-import User from "@/types/user";
+import User from "@/components/user/user";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export default class Utility{

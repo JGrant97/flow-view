@@ -1,7 +1,7 @@
 export default interface User {
   jti: string,
   sub: string,
-  displayname: string,
+  userName: string,
   email: string,
   email_verified: boolean,
   iss: string,

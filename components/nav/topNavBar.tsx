@@ -1,9 +1,10 @@
 'use client'
 
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components"
 import { UserContext } from "../userContextProvider";
+import User from "../user/user";
 
 const Container = styled.div`
     background-color: var(--foreground);
@@ -70,7 +71,7 @@ const AccountChildren = styled.div`
 const AccountContainer = styled.div`
     position: relative;
     margin: auto;
-
+    z-index: 1;
     
     ${StyledLink}{
         padding: 1rem;
@@ -89,12 +90,17 @@ const AccountContainer = styled.div`
     }
 `;
 
-export default function TopNavBar() {
-    const userContext = useContext(UserContext);
+export default function TopNavBar({defaultUser} : {defaultUser: User | undefined}) {
+    const [currentUser, setCurrentUser] = useState<User | undefined>(defaultUser)
+
+    useEffect(() => {
+        setCurrentUser(defaultUser);
+    }, [defaultUser])
+
     return (
         <Container>
             <ElementList>
-                <StyledLink href={"/"}>FlowView {userContext?.displayname}</StyledLink>
+                <StyledLink href={"/"}>FlowView</StyledLink>
                 <StyledLink href={"/browse"}>Browse</StyledLink>
                 <StyledLink href={"/following"}>Following</StyledLink>
                 <StyledLink href={"/trending"}>Trending</StyledLink>
@@ -103,14 +109,14 @@ export default function TopNavBar() {
                 <SearchInput type="search" placeholder="Search" results={10} />
             </ElementList>
             <ElementList>
-                {userContext ?
+                {currentUser ?
                     <AccountContainer>
                         <Icon>N</Icon>
                         <AccountChildren>
-                            <StyledLink href={"/account/@NomadUK"}>Account</StyledLink>
+                            <StyledLink href={`/@${currentUser.userName}`}>Account</StyledLink>
                             <StyledLink href={"/contentmanager"}>Content Manager</StyledLink>
                             <StyledLink href={"/upload"}>Upload</StyledLink>
-                            <StyledLink href={"/account"}>Sign out</StyledLink>
+                            <StyledLink href={"/signout"}>Sign out</StyledLink>
                         </AccountChildren>
                     </AccountContainer>
                     :

@@ -30,6 +30,10 @@ const StyledPlayer = styled(MediaPlayer)`
   border: none !important;
   outline: none !important;
   border-radius: 0;
+
+  .vds-poster{
+    z-index: 0;
+  }
 `;
 
 const StyledMediaProvider = styled(MediaProvider)`
@@ -37,7 +41,7 @@ const StyledMediaProvider = styled(MediaProvider)`
   display: unset;
 `;
 
-export default function VideoPlayer() {
+export default function VideoPlayer({path, thumbnail}: {path: string, thumbnail: string}) {
     const player = useRef<MediaPlayerInstance>(null);
     const { playing, paused } = useMediaStore(player);
 
@@ -106,14 +110,14 @@ export default function VideoPlayer() {
             <StyledPlayer
                 ref={player}
                 title="Sprite Fight"
-                src="https://files.vidstack.io/sprite-fight/hls/stream.m3u8"
+                src={path}
                 playsInline
                 crossOrigin
                 aspectRatio="16/9"
                 googleCast={{
                     language: 'en-US',
                 }}
-                poster="https://files.vidstack.io/sprite-fight/poster.webp"
+                poster={thumbnail}
                 onProviderChange={onProviderChange}
                 onEnded={handleVideoEnd}
                 onPlay={() => console.log('[onPlay] Video started playing.')}
